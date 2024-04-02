@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOOKSky</title>
+    <link rel="stylesheet" href="booksky.css">
+</head>
+<body>
+    <div class="nav"><h1>BOOKSHY</h1></div>
+    
+    <div class="popup-overlay"></div>
+    <div class="popup">
+        <form action="">
+            <input type="text" placeholder="BOOK NAME" id="book-name">
+            <input type="text" placeholder="BOOK AUTHOR" id="book-author">
+            <textarea name="description" id="description" cols="30" rows="10" placeholder="DESCRIPTION"></textarea>
+            <button id="save" onclick="sav_e(event)">SAVE</button>
+            <button id="cancel" onclick="cancel1(event)">CANCEL</button>
+        </form>
+        
+    </div>    
+    <div class="content">
+        <div class="add-container">
+            <div><p onclick="add_popup()">+</p></div>
+            
+        </div>
+        <div class="book-info">
+            <h2 class="book-name">BOOK NAME</h2>
+            <h3 class="book-author">BOOK AUTHOR</h3>
+            <P class="book-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione nisi corporis totam facere quia ipsum laboriosam? Eos incidunt aut architecto dolorem consequuntur enim modi! Ipsa aperiam assumenda eligendi fugiat in!</P>
+            <button onclick="disappear(event)">Delete</button>
+        </div>
+        
+    </div>
+    <script>
+        var popup_overlay = document.querySelector(".popup-overlay")
+        var popup = document.querySelector(".popup")
+        function add_popup() {
+            popup.style.display = "block"
+            popup_overlay.style.display = "block"
+        }
+        // function back(){
+        //     popup.style.display = "none"
+        //     
+        // }
+        function cancel1(event){
+            event.preventDefault()
+            popup.style.display = "none"
+            popup_overlay.style.display = "none"
+        }
+        //storing the popup input datas
+        var bookName = document.getElementById("book-name")
+        var bookAuthor = document.getElementById("book-author")
+        var description = document.getElementById("description")
+        var content = document.querySelector(".content")
+        function sav_e(event){
+            event.preventDefault()
+            var a = document.createElement("div")
+            a.setAttribute("class","book-info")
+            a.innerHTML =  `<h2 class="book-name">${bookName.value}</h2><h3 class="book-author">${bookAuthor.value}</h3>
+            <P class="book-description">${description.value}</P>
+            <button onclick="disappear(event)">Delete</button>`
+            content.append(a)
+            cancel1(event)
+
+
+        }
+        function disappear(event){
+            event.target.parentElement.remove()
+
+        }
+    </script>
+</body>
+</html>
